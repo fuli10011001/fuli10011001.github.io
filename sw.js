@@ -93,9 +93,9 @@ self.addEventListener('push', function(e) {
       primaryKey: 1
     },
     actions: [
-      {action: 'explore', title: 'Explore this new world',
+      {action: 'explore', title: 'OK',
         icon: 'img/profile.png'},
-      {action: 'close', title: 'I dont want any of this',
+      {action: 'close', title: 'Cancel',
         icon: 'img/profile.png'},
     ]
   };
@@ -137,6 +137,24 @@ self.addEventListener('periodicsync', function(event) {
 });
 
 function doSomeStuff() {
-  console.log('do some staff!')
+  console.log('do some staff!');
+
+  var options = {
+    body: 'do some staff!',
+    icon: 'img/profile.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    },
+    actions: [
+      {action: 'explore', title: 'OK',
+        icon: 'img/profile.png'},
+      {action: 'close', title: 'Cancel',
+        icon: 'img/profile.png'},
+    ]
+  };
+  self.registration.showNotification('Push Notification', options)
+
   return Promise.resolve();
 }

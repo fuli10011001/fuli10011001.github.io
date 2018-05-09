@@ -215,6 +215,7 @@
               <div id="success"></div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
+                <input type="button" id="button1" onclick="registerSync()" value="Register Sync" />
               </div>
             </form>
           </div>
@@ -460,11 +461,8 @@
           });
         }
 
-        function subscribeUser() {
+        function registerSync() {
           navigator.serviceWorker.ready.then(function(reg) {
-            console.log('serviceWorker ready');
-            subscribe(reg);
-
             reg.sync.register('outbox').then(function() {
               console.log('outbox registration succeeded');
             }, function() {
@@ -480,7 +478,14 @@
             //   console.log('get-latest-news registration succeeded');
             // }, function() {
             //   console.log('get-latest-news registration failed');
-            // });
+            // });            
+          })
+        }
+
+        function subscribeUser() {
+          navigator.serviceWorker.ready.then(function(reg) {
+            console.log('serviceWorker ready');
+            subscribe(reg);
 
             // reg.pushManager.getSubscription().then(function(sub) {
             //   if (sub === null) {
