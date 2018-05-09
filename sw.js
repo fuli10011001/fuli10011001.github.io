@@ -118,3 +118,25 @@ self.addEventListener('notificationclick', function(e) {
     notification.close();
   }
 });
+
+// sync will fire when the user agent believes the user has connectivity.
+self.addEventListener('sync', function(event) {
+  if (event.tag == 'outbox') {
+    event.waitUntil(doSomeStuff());
+  }
+});
+
+self.addEventListener('periodicsync', function(event) {
+  if (event.registration.tag == 'get-latest-news') {
+    event.waitUntil(doSomeStuff());
+  }
+  else {
+    // unknown sync, may be old, best to unregister
+    event.registration.unregister();
+  }
+});
+
+function doSomeStuff() {
+  console.log('do some staff!')
+  return Promise.resolve();
+}

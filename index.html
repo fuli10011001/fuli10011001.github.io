@@ -464,6 +464,24 @@
           navigator.serviceWorker.ready.then(function(reg) {
             console.log('serviceWorker ready');
             subscribe(reg);
+
+            reg.sync.register('outbox').then(function() {
+              console.log('outbox registration succeeded');
+            }, function() {
+              console.log('outbox registration failed');
+            });
+
+            // reg.periodicSync.register({
+            //   tag: 'get-latest-news',         // default: ''
+            //   minPeriod: 12 * 60 * 60 * 1000, // default: 0
+            //   powerState: 'avoid-draining',   // default: 'auto'
+            //   networkState: 'avoid-cellular'  // default: 'online'
+            // }).then(function(periodicSyncReg) {
+            //   console.log('get-latest-news registration succeeded');
+            // }, function() {
+            //   console.log('get-latest-news registration failed');
+            // });
+
             // reg.pushManager.getSubscription().then(function(sub) {
             //   if (sub === null) {
             //     subscribe(reg);
